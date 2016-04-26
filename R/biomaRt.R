@@ -375,7 +375,7 @@ filterType <- function(filter, mart){
 #getBM: generic BioMart query function   # 
 ##########################################
 
-getBM <- function(attributes, filters = "", values = "", mart, curl = NULL, checkFilters = TRUE, verbose=FALSE, uniqueRows=TRUE, bmHeader=FALSE){
+getBM <- function(attributes, filters = "", values = "", mart, curl = NULL, checkFilters = TRUE, verbose=FALSE, uniqueRows=TRUE, bmHeader=FALSE, quote="\""){
   
   martCheck(mart)
   if(missing( attributes ))
@@ -526,7 +526,7 @@ getBM <- function(attributes, filters = "", values = "", mart, curl = NULL, chec
 
     ## convert the serialized table into a dataframe
     con = textConnection(postRes)
-    result = read.table(con, sep="\t", header=bmHeader, quote = "\"", comment.char = "", check.names = FALSE, stringsAsFactors=FALSE)
+    result = read.table(con, sep="\t", header=bmHeader, quote = quote, comment.char = "", check.names = FALSE, stringsAsFactors=FALSE)
     if(verbose){
       writeLines("#################\nParsed results:")
       print(result)
